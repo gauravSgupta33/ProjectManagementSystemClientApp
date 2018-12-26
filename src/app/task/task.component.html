@@ -1,0 +1,326 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-9 col-md-7 col-lg-5">
+			<div class="card">
+				<div class="card-body">
+					<div class="row">
+						<div class="col-12">
+							<h3 class="card-title text-center bg-info">Add Task</h3>
+						</div>
+					</div>
+					<form [formGroup]="taskForm" class="form-horizontal form-group"
+						(ngSubmit)="updateTask(taskForm)" ngNativeValidate>
+						<div class="form-group row">
+							<div class="col-xs-2">
+								<label for="PrjectName">Project:</label>
+							</div>
+							<div class="col-xs-8">
+								<input type="text" id="inputProjectName" class="form-control"
+									name="ProjectName" formControlName="projectName"
+									placeholder="Project Name" readonly required autofocus>
+								<div class="alert"
+									*ngIf="!taskForm.controls['projectName'].valid && taskForm.controls['projectName'].touched">{{
+									errorMessage.projectNameValidationErrorMessage }}</div>
+							</div>
+							<div class="col-xs-2">
+								<input type="button" class="btn btn-secondary text-uppercase"
+									value="search" (click)="openProjectModal()">
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<div class="col-xs-2">
+								<label for="TaskName">Task: </label>
+							</div>
+							<div class="col-xs-10">
+								<input type="text" id="TaskName" class="form-control"
+									name="TaskName" formControlName="taskName"
+									placeholder="Task Name" required>
+								<div class="alert"
+									*ngIf="!taskForm.controls['taskName'].valid && taskForm.controls['taskName'].touched">{{
+									errorMessage.taskNameValidationErrorMessage }}</div>
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<div class="col-xs-2"></div>
+							<div class="col-xs-1">
+
+								<input type="checkbox" name="parentTaskCheckBox"
+									[checked]="taskForm.get('parentTaskCheckBox').value" formControlName="parentTaskCheckBox">
+							</div>
+							<div class="col-xs-3">
+								<label class="mx-1" for="ParentTask">Parent Task </label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-2">
+								<label for="priority">Priority:</label>
+							</div>
+							<div class="col-xs-10">
+								<nouislider [tooltips]="true" name="priority"
+									formControlName="priority" [min]="0" [max]="30" [step]="1"
+									[(ngModel)]="someRange"></nouislider>
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<div class="col-xs-2">
+								<label for="ParentTask">Parent Task:</label>
+							</div>
+							<div class="col-xs-8">
+								<input type="text" id="inputParentTask"
+									formControlName="parentTaskName" class="form-control"
+									name="parentTaskName" placeholder="Parent Task" readonly>
+								<div class="alert"
+									*ngIf="!taskForm.controls['parentTaskName'].valid && taskForm.controls['parentTaskName'].touched">{{
+									errorMessage.taskNameValidationErrorMessage }}</div>
+							</div>
+							<div class="col-xs-2">
+								<input type="button" class="btn btn-secondary text-uppercase"
+									value="search" (click)="openTaskModal()" [disabled]='getParentTaskCheckBoxValue()'>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-xs-2">
+								<label for="StartDate">Start Date:</label>
+							</div>
+							<div class="col-xs-4">
+								<input type="text" #dateFromDp="dpDayPicker"
+									[dpDayPicker]="dayPickerConfig" [displayDate]="displayDate"
+									[theme]="'dp-material'" formControlName="dateFrom"
+									[mode]="'day'" (onChange)="date = $event"
+									placeholder="Start Date" />
+								<div class="alert"
+									*ngIf="!taskForm.controls['dateFrom'].valid && taskForm.controls['dateFrom'].touched">{{
+									errorMessage.startDateValidationErrorMessage }}</div>
+							</div>
+							<div class="col-xs-2">
+								<label for="EndDate">End Date:</label>
+							</div>
+							<div class="col-xs-4">
+								<input type="text" #dateToDp="dpDayPicker"
+									[dpDayPicker]="dayPickerConfig" [displayDate]="displayDate"
+									[theme]="'dp-material'" formControlName="dateTo" [mode]="'day'"
+									(onChange)="date = $event" placeholder="End Date" />
+								<div class="alert"
+									*ngIf="!taskForm.controls['dateTo'].valid && taskForm.controls['dateTo'].touched">{{
+									errorMessage.endDateValidationErrorMessage }}</div>
+							</div>
+						</div>
+
+						<br />
+
+						<div class="form-group row">
+							<div class="col-xs-2">
+								<label for="User">User:</label>
+							</div>
+							<div class="col-xs-8">
+								<input type="text" id="inputUserName" formControlName='userName'
+									name="User" class="form-control" placeholder="User" readonly
+									required>
+							</div>
+							<div class="col-xs-2">
+								<input type="button" class="btn btn-secondary text-uppercase"
+									value="search" (click)="openUserModal()" [disabled]='getParentTaskCheckBoxValue()'>
+								<div class="alert"
+									*ngIf="!taskForm.controls['userName'].valid && taskForm.controls['userName'].touched">{{
+									errorMessage.userSelectionValidationErrorMessage }}</div>
+							</div>
+						</div>
+						<div class="btn-group-lg float-right mx-auto">
+							<input type="submit" class="btn btn-secondary text-uppercase"
+								value="Update" [disabled]="taskForm.invalid">
+							<!-- button
+								class="btn btn-primary button-md text-uppercase badge-pill button-block mx-auto"
+								(click)="updateTask()" [disabled]="taskForm.invalid">Update</button-->
+							<button
+								class="btn btn-primary button-md text-uppercase badge-pill button-block mx-auto"
+								type="reset" (click)="cancel()">&nbsp;&nbsp;Cancel&nbsp;&nbsp;</button>
+						</div>
+
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal" [class.show]="success" id="exampleModal12"
+		tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">{{ taskStatus}}</h4>
+					<button type="button" class="close" aria-label="Close"
+						(click)="openDialog()">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">Task update successful!!!!</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-outline-dark"
+						(click)="openDialog()">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal -->
+	<div class="modal" [class.show]="showUserModal" id="exampleModal"
+		tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">User Directory</h5>
+					<button type="button" class="close" (click)="closeUserModal()"
+						data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="table-wrapper-scroll-y">
+
+						<form class="form-inline">
+							<div class="form-group">
+								<label for="projectModelSearch">Search User : </label> <input
+									type="text" id="search" class="form-control" name="search"
+									[(ngModel)]="searchUser" placeholder="Search...">
+							</div>
+						</form>
+
+						<table class="table table-bordered table-hover">
+							<thead>
+								<tr>
+									<th>Employee Id</th>
+									<th>First Name</th>
+									<th>Last Name</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr
+									*ngFor="let user of dataHolder.getUserList() | userFilter : searchUser ;let i = index"
+									(dblclick)="setDblClickedRow(user)"
+									(click)="setClickedRow(user)" [class.active]="i == selectedRow">
+									<td>{{ user.empId }}</td>
+									<td>{{ user.firstName}}</td>
+									<td>{{ user.lastName}}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal" (click)="closeUserModal()">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Project Modal -->
+	<div class="modal" [class.show]="showProjectModal" id="ProjectModal"
+		tabindex="-1" role="dialog" aria-labelledby="ProjectModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="ProjectModalLabel">Project
+						Directory</h5>
+					<button type="button" class="close" (click)="closeProjectModal()"
+						data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="table-wrapper-scroll-y">
+
+						<form class="form-inline">
+							<div class="form-group">
+								<label for="projectModelSearch">Search Project : </label> <input
+									type="text" id="search" class="form-control" name="search"
+									[(ngModel)]="searchProject" placeholder="Search...">
+							</div>
+						</form>
+
+						<table class="table table-bordered table-hover">
+							<thead>
+								<tr>
+									<th>Project Name</th>
+									<th>Start Date</th>
+									<th>End Date</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr
+									*ngFor="let project of dataHolder.getProjectList() | projectSearchFilter : searchProject;let i = index"
+									(dblclick)="setDblClickedProjectRow(project)"
+									(click)="setClickedProjectRow(project)"
+									[class.active]="i == selectedProjectRow">
+									<td>{{ project.projectName }}</td>
+									<td>{{ project.startDate }}</td>
+									<td>{{ project.endDate }}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal" (click)="closeProjectModal()">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Project Modal -->
+	<div class="modal" [class.show]="showTaskModal" id="TaskModal"
+		tabindex="-1" role="dialog" aria-labelledby="TaskModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="ProjectModalLabel">Task Directory</h5>
+					<button type="button" class="close" (click)="closeTaskModal()"
+						data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="table-wrapper-scroll-y">
+						<form class="form-inline">
+							<div class="form-group">
+								<label for="projectModelSearch">Search Task : </label> <input
+									type="text" id="searchTask" class="form-control" name="search"
+									[(ngModel)]="searchTask" placeholder="Search...">
+							</div>
+						</form>
+						<table class="table table-bordered table-hover">
+							<thead>
+								<tr>
+									<th>Task</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr
+									*ngFor="let parentTask of dataHolder.getParentTaskList();let i = index"
+									(dblclick)="setDblClickedTaskRow(parentTask)"
+									(click)="setClickedTaskRow(parentTask)"
+									[class.active]="i == selectedTaskRow">
+									<td>{{ parentTask.parent_task }}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal" (click)="closeTaskModal()">Close</button>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>

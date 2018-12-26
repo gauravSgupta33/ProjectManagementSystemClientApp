@@ -1,0 +1,181 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-9 col-md-7 col-lg-5">
+			<div class="card">
+				<div class="card-body">
+					<div class="row">
+						<div class="col-12">
+							<h3 class="card-title text-center bg-info">Edit Task</h3>
+						</div>
+					</div>
+					<form #taskEditForm="ngForm" class="form-horizontal form-group" ngNativeValidate>
+						<div class="form-group row">
+							<div class="col-xs-2">
+								<label for="PrjectName">Project:</label>
+							</div>
+							<div class="col-xs-10">
+								<input type="text" id="inputProjectName" class="form-control"
+									name="ProjectName" [(ngModel)]="masterTask.project.projectName" placeholder="Project Name"
+									readonly required autofocus>
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<div class="col-xs-2">
+								<label for="TaskName">Task: </label>
+							</div>
+							<div class="col-xs-10">
+								<input type="text" id="TaskName" class="form-control"
+									name="TaskName" [(ngModel)]="masterTask.taskName"
+									placeholder="Task Name" required>
+							</div>
+						</div>
+
+						<div [formGroup]="filterEditTaskForm" class="row">
+							<div class="col-xs-2">
+								<label for="priority">Priorty:</label>
+							</div>
+							<div class="col-xs-10">
+								<nouislider [tooltips]="true" name="priority" formControlName="priority"
+									[min]="0" [max]="30" [step]="1"
+									[(ngModel)]="someRange"></nouislider>
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<div class="col-xs-2">
+								<label for="ParentTask">Parent Task:</label>
+							</div>
+							<div [formGroup]="filterEditTaskForm" class="col-xs-8">
+								<input type="text" id="inputParentTask" formControlName="parentTaskName" class="form-control"
+									name="Manager" placeholder="Parent Task"
+									readonly>
+							</div>
+							<div class="col-xs-2">
+								<button class="btn btn-primary button-md text-uppercase button-block"
+									(click)="openTaskModal()">Search</button>
+							</div>
+						</div>
+						
+						<div class="row" [formGroup]="filterEditTaskForm">
+							<div class="col-xs-2">
+								<label for="StartDate">Start Date:</label>
+							</div>
+							<div class="col-xs-4">
+								<input type="text" #dateFromDp="dpDayPicker"
+									[dpDayPicker]="dayPickerConfig" [displayDate]="displayDate"
+									[theme]="'dp-material'" formControlName="dateFrom"
+									[mode]="'day'" (onChange)="date = $event"
+									placeholder="Start Date"/>
+							</div>
+							<div class="col-xs-2">
+								<label for="EndDate">End Date:</label>
+							</div>
+							<div class="col-xs-4">
+								<input type="text" #dateToDp="dpDayPicker"
+									[dpDayPicker]="dayPickerConfig" [displayDate]="displayDate"
+									[theme]="'dp-material'" formControlName="dateTo" [mode]="'day'"
+									(onChange)="date = $event" placeholder="End Date"/>
+									<div class="alert"
+										*ngIf="!filterEditTaskForm.controls['dateTo'].valid && filterEditTaskForm.controls['dateTo'].touched">{{ errorMessage.endDateValidationErrorMessage }}</div>
+									
+							</div>
+						</div>
+
+						<br/>
+
+						<div  class="form-group row">
+							<div class="col-xs-2">
+								<label for="User">User:</label>
+							</div>
+							<div class="col-xs-10">
+								<input type="text" id="inputUserName" [(ngModel)]='masterTask.user.empId'
+									name="User" class="form-control" placeholder="User" readonly required>
+							</div>
+						</div>
+						<div class="btn-group-lg float-right mx-auto">
+							<button
+								class="btn btn-primary button-md text-uppercase badge-pill button-block mx-auto"
+								(click)="updateTask()" [disabled]="taskEditForm.form.invalid || filterEditTaskForm.invalid">Update</button>
+							<button
+								class="btn btn-primary button-md text-uppercase badge-pill button-block mx-auto"
+								type="reset" (click)="sendToParent(null)">&nbsp;&nbsp;Cancel&nbsp;&nbsp;</button>
+						</div>
+
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal" [class.show]="success" id="exampleModal12"
+		tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">{{ taskStatus}}</h4>
+					<button type="button" class="close" aria-label="Close"
+						(click)="openDialog()">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">Task update successful!!!!</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-outline-dark"
+						(click)="openDialog()">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- Task Modal -->
+	<div class="modal" [class.show]="showTaskModal" id="TaskModal"
+		tabindex="-1" role="dialog" aria-labelledby="TaskModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="ProjectModalLabel">Task	Directory</h5>
+					<button type="button" class="close" (click)="closeTaskModal()"
+						data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="table-wrapper-scroll-y">
+					<form class="form-inline">
+						<div class="form-group">
+						<label for="projectModelSearch">Search Task : </label>
+							<input type="text" id="searchTask" class="form-control" name="search"
+								[(ngModel)]="searchTask" placeholder="Search...">
+						</div>
+					</form>
+						<table class="table table-bordered table-hover">
+							<thead>
+								<tr>
+									<th>Task</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr
+									*ngFor="let parentTask of dataHolder.getParentTaskList();let i = index"
+									(dblclick)="setDblClickedTaskRow(parentTask)" (click)="setClickedTaskRow(parentTask)"
+									[class.active]="i == selectedTaskRow">
+									<td>{{ parentTask.parent_task }}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal" (click)="closeTaskModal()">Close</button>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
