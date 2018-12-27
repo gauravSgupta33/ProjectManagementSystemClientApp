@@ -1,5 +1,6 @@
 import { CustomSortingPipe } from './common/CustomSortingPipe';
 import { DataHolder } from './common/DataHolder';
+import { ParentTaskModalSerachFilterPipe } from './common/ParentTaskModalSerachFilterPipe';
 import { PrjoectModalSearchFilterPipe } from './common/ProjectModelSerachFilterPipe';
 import { ErrorMessage } from './common/errormessage';
 import { UserFilterPipe } from './common/filterpipe';
@@ -46,7 +47,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [EditComponent, UserComponent, TaskComponent, ProjectComponent, ViewComponent, UserFilterPipe, ViewComponent, CustomSortingPipe, PrjoectModalSearchFilterPipe],
+  declarations: [EditComponent, UserComponent, TaskComponent, ProjectComponent, ViewComponent, UserFilterPipe, ViewComponent, CustomSortingPipe, PrjoectModalSearchFilterPipe, ParentTaskModalSerachFilterPipe],
   imports: [RouterModule.forRoot(routes), NgbModule.forRoot(), BrowserModule, FormsModule, ReactiveFormsModule, HttpClientModule, AngularFontAwesomeModule, NgbModule, NouisliderModule, DpDatePickerModule, NgDatepickerModule],
   exports: [RouterModule],
     providers: [DataHolder, ErrorMessage, UserService, ProjectService, ParentTaskService, GlobalErrorHandlerService, TasksService,

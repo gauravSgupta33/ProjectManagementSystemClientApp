@@ -160,7 +160,7 @@
 							</thead>
 							<tbody>
 								<tr
-									*ngFor="let parentTask of dataHolder.getParentTaskList();let i = index"
+									*ngFor="let parentTask of dataHolder.getParentTaskList() | parentTaskSearchFilter: searchTask;let i = index"
 									(dblclick)="setDblClickedTaskRow(parentTask)" (click)="setClickedTaskRow(parentTask)"
 									[class.active]="i == selectedTaskRow">
 									<td>{{ parentTask.parent_task }}</td>
