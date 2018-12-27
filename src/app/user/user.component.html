@@ -74,7 +74,7 @@
 	</div>
 	<hr>
 	<div class="row">
-		<div class="col-sm-3 col-md-5 col-lg-5">
+		<div class="col-sm-3 col-md-7 col-lg-5">
 			<div class="card">
 				<div class="card-body">
 					<form class="form-inline">
@@ -99,10 +99,10 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-sm-3 col-md-5 col-lg-5">
+		<div class="col-sm-3 col-md-7 col-lg-5">
 			<table class="table table-bordered">
 				<tr
-					*ngFor="let user of dataHolder.getUserList() | SortBy :{property:sortType, direction: direction}">
+					*ngFor="let user of dataHolder.getUserList() | SortBy :{property:sortType, direction: direction}| userFilter:search;let i = index">
 					<td style="width: 85%">
 						<div class="card">
 							<div class="card-body">

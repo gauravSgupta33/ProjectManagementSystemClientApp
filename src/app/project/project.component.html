@@ -4,7 +4,7 @@
 			<div class="card">
 				<div class="card-body">
 					<div class="row">
-						<div class="col-12">
+						<div class="col-sm-12">
 							<h3 class="card-title text-center bg-warning">Add Project</h3>
 						</div>
 					</div>
@@ -73,11 +73,11 @@
 	</div>
 	<hr>
 	<div class="row">
-		<div class="col-sm-12 col-md-4 col-lg-6">
+		<div class="col-sm-12 col-md-7 col-lg-6">
 			<div class="card">
 				<div class="card-body">
 					<div class="row">
-						<div class="col-12">
+						<div class="col-sm-12">
 							<input type="text" id="search" class="form-control" name="search"
 								[(ngModel)]="search" placeholder="Search...">
 						</div>
@@ -88,25 +88,25 @@
 	</div>
 
 	<div class="row">
-		<div class="col-sm-12 col-md-4 col-lg-6">
+		<div class="col-sm-12 col-md-7 col-lg-6">
 			<div class="card">
 				<div class="card-body">
 					<div class="row">
-						<div class="col-2">
+						<div class="col-sm-2 mx-auto">
 							<label for="sort">Sort: </label>
 						</div>
-						<div class="col-3">
+						<div class="col-sm-3 mx-auto">
 							<button class="btn btn-primary text-uppercase" (click)="sortProject('startDate')">Start
 								Date</button>
 						</div>
-						<div class="col-3">
+						<div class="col-sm-2 mx-auto">
 							<button class="btn btn-primary text-uppercase" (click)="sortProject('endDate')">End
 								Date</button>
 						</div>
-						<div class="col-2">
+						<div class="col-sm-2 mx-auto">
 							<button class="btn btn-primary text-uppercase" (click)="sortProject('priority')">Priority</button>
 						</div>
-						<div class="col-2">
+						<div class="col-sm-3 mx-auto">
 							<button class="btn btn-primary text-uppercase" (click)="sortProject('completed')">Completed</button>
 						</div>
 					</div>
@@ -116,23 +116,23 @@
 	</div>
 
 	<div class="row" *ngFor="let prj of dataHolder.getProjectList() | SortBy :{property:sortType, direction: direction} | projectSearchFilter:search;let i = index">
-		<div class="col-sm-12 col-md-4 col-lg-6">
+		<div class="col-sm-12 col-md-7 col-lg-6">
 			<div class="card">
 				<div class="card-body border">
 						<div class="row border justify-content-start">
-							<div class="col-8 border">
+							<div class="col-sm-8 border">
 								<br/>
 								<div class="row mb-1">
-									<div class="col-3">
+									<div class="col-sm-3">
 										<label for="ProjectName">Project:</label>
 									</div>
-									<div class="col-9">
+									<div class="col-sm-9">
 										<label class="border text-left pl-3" style="width:100%;height:3%" > {{ prj.projectName }} </label>
 									</div>
 								</div>
 								<br />
 								<div class="row ustify-content-around">
-									<div class="col-6">
+									<div class="col-sm-6">
 										<div class="row justify-content-start">
 											<div class="col-sm-7">
 												<label for="taskCount">No of Tasks:</label>
@@ -145,7 +145,7 @@
 											</div>
 										</div>
 									</div>
-									<div class="col-6">
+									<div class="col-sm-6">
 										<div class="row justify-content-start">
 											<div class="col-sm-7 mx-auto">
 												<label for="Completed">Completed:</label>
@@ -158,7 +158,7 @@
 								</div>
 								<br />
 								<div class="row justify-content-start">
-									<div class="col-6">
+									<div class="col-sm-6">
 										<div class="row">
 											<div class="col-sm-4">
 												<label for="startDate">Start Date:</label>
@@ -168,7 +168,7 @@
 											</div>
 										</div>
 									</div>
-									<div class="col-6">
+									<div class="col-sm-6">
 										<div class="row justify-content-start">
 											<div class="col-sm-4 mx-auto">
 												<label for="EndDate">End Date:</label>
@@ -180,13 +180,13 @@
 									</div>
 								</div>
 							</div>
-							<div class="col-2 border mx-auto">
+							<div class="col-sm-2 border mx-auto">
 							<br/>
 							<br/>
 							<div class="row">
-							<div class="col-12">
+							<div class="col-sm-12">
 										<div class="row justify-content-start">
-											<div class="col mx-auto">
+											<div class="col-sm-12 mx-auto">
 												<label class="text-center" for="Priority">Priority:</label>
 											</div>
 										</div>
@@ -194,9 +194,9 @@
 							</div>
 							
 							<div class="row mb-auto">
-							<div class="col-12">
+							<div class="col-sm-12">
 										<div class="row justify-content-start">
-											<div class="col">
+											<div class="col-sm-12">
 												<label class="border text-center pt-3" style="width:100%;height:10%">  {{ prj.priority }} </label>
 											</div>
 										</div>
@@ -208,7 +208,7 @@
 							<br/>
 							<br/>
 							<div class="row mb-auto">
-							<div class="col-12">
+							<div class="col-sm-12">
 										<div class="row justify-content-start mx-auto mb-auto">
 											<div class="col-sm-12 mx-auto">
 												<button type="button" class="btn btn-primary text-uppercase" (click)='updateProject(prj, i)'>Update</button>
@@ -220,7 +220,7 @@
 							<br/>
 							
 							<div class="row mb-auto">
-							<div class="col-12">
+							<div class="col-sm-12">
 										<div class="row justify-content-start mx-auto mb-auto">
 											<div class="col-sm-12 mx-auto">
 												<button type="button" class="btn btn-primary text-uppercase" (click)="openModal()">Suspend</button>
