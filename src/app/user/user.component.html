@@ -1,6 +1,6 @@
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-sm-2 col-md-7 col-lg-5">
+		<div class="col-6">
 			<div class="card">
 				<div class="card-body boarder">
 					<div class="row">
@@ -30,10 +30,10 @@
 
 						<div class="form-group mx-auto">
 							<div class=" form-group row">
-								<div class="col-xs-2">
+								<div class="col-2">
 									<label for="lastName">Last Name: </label>
 								</div>
-								<div class="col-xs-10">
+								<div class="col-10">
 									<!-- input type="text" id="inputLastName" class="form-control"
 										name="lastName" [(ngModel)]="user.lastName"
 										placeholder="Last Name" required-->
@@ -47,10 +47,10 @@
 
 						<div class="form-group mx-auto">
 							<div class=" form-group row">
-								<div class="col-xs-2">
+								<div class="col-2">
 									<label for="empId">Emp Id: </label>
 								</div>
-								<div class="col-xs-10">
+								<div class="col-10">
 									<!-- input type="number" id="inputEmpId" class="form-control"
 										name="empId" [(ngModel)]="user.empId"
 										placeholder="Employee Id" required-->
@@ -74,7 +74,7 @@
 	</div>
 	<hr>
 	<div class="row">
-		<div class="col-sm-3 col-md-7 col-lg-5">
+		<div class="col-6">
 			<div class="card">
 				<div class="card-body">
 					<form class="form-inline">
@@ -99,7 +99,7 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-sm-3 col-md-7 col-lg-5">
+		<div class="col-6">
 			<table class="table table-bordered">
 				<tr
 					*ngFor="let user of dataHolder.getUserList() | SortBy :{property:sortType, direction: direction}| userFilter:search;let i = index">
