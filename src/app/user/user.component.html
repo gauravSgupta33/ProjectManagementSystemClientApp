@@ -1,6 +1,6 @@
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-6">
+		<div class="col-8">
 			<div class="card">
 				<div class="card-body boarder">
 					<div class="row">
@@ -74,7 +74,7 @@
 	</div>
 	<hr>
 	<div class="row">
-		<div class="col-6">
+		<div class="col-8">
 			<div class="card">
 				<div class="card-body">
 					<form class="form-inline">
@@ -99,7 +99,7 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-6">
+		<div class="col-8">
 			<table class="table table-bordered">
 				<tr
 					*ngFor="let user of dataHolder.getUserList() | SortBy :{property:sortType, direction: direction}| userFilter:search;let i = index">
