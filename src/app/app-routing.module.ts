@@ -2,6 +2,7 @@ import { CustomSortingPipe } from './common/CustomSortingPipe';
 import { DataHolder } from './common/DataHolder';
 import { ParentTaskModalSerachFilterPipe } from './common/ParentTaskModalSerachFilterPipe';
 import { PrjoectModalSearchFilterPipe } from './common/ProjectModelSerachFilterPipe';
+import { AppContext } from './common/appcontext';
 import { ErrorMessage } from './common/errormessage';
 import { UserFilterPipe } from './common/filterpipe';
 import { ErrorDisplayComponent } from './error-display/error-display.component';
@@ -50,7 +51,7 @@ const routes: Routes = [
   declarations: [EditComponent, UserComponent, TaskComponent, ProjectComponent, ViewComponent, UserFilterPipe, ViewComponent, CustomSortingPipe, PrjoectModalSearchFilterPipe, ParentTaskModalSerachFilterPipe],
   imports: [RouterModule.forRoot(routes), NgbModule.forRoot(), BrowserModule, FormsModule, ReactiveFormsModule, HttpClientModule, AngularFontAwesomeModule, NgbModule, NouisliderModule, DpDatePickerModule, NgDatepickerModule],
   exports: [RouterModule],
-    providers: [DataHolder, ErrorMessage, UserService, ProjectService, ParentTaskService, GlobalErrorHandlerService, TasksService,
+    providers: [AppContext, DataHolder, ErrorMessage, UserService, ProjectService, ParentTaskService, GlobalErrorHandlerService, TasksService,
     { provide: ErrorHandler, useClass: GlobalErrorHandlerService }
    ]
 })

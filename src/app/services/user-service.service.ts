@@ -1,3 +1,4 @@
+import { AppContext } from '../common/appcontext';
 import {UserVO} from '../model/User';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
@@ -5,28 +6,26 @@ import {Observable} from 'rxjs';
 
 @Injectable()
 export class UserService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private appContext: AppContext) {}
 
   getUsers(): Observable<UserVO[]> {
-    return this.http.get<UserVO[]>('http://localhost:9080' + '/users');
+    return this.http.get<UserVO[]>(this.appContext.SERVER_URL + '/users');
   }
 
   addUser(user): Observable<UserVO> {
-    return this.http.post<UserVO>('http://localhost:9080' + '/createUser', user);
+    return this.http.post<UserVO>(this.appContext.SERVER_URL + '/createUser', user);
   }
 
   removeUser(user):Observable<boolean> {
-    return this.http.post<boolean>('http://localhost:9080/removeUser', user);
-    //alert('deleted');
-    //return;
+    return this.http.post<boolean>(this.appContext.SERVER_URL + '/removeUser', user);
   }
 
    editUser(id, user): Observable<UserVO> {
-    return this.http.put<UserVO>(`http://localhost:9080` + `/editUser/${id}`, user);
+    return this.http.put<UserVO>(this.appContext.SERVER_URL + `/editUser/${id}`, user);
   }
   
   addOrUpdateProjectDetailsForUser(user): Observable<UserVO> {
-    return this.http.post<UserVO>(`http://localhost:9080` + `/addOrUpdateProjectDetailsForUser`, user);
+    return this.http.post<UserVO>(this.appContext.SERVER_URL + `/addOrUpdateProjectDetailsForUser`, user);
   }
 
   private extractData(res: Response) {
