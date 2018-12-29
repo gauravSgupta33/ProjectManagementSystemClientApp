@@ -2,21 +2,21 @@
 	<div class="row">
 		<div class="col-9 col-7 col-5">
 			<div class="card">
+				<div class="card-header bg-info">
+					<h2 class="card-title text-center">Edit Task</h2>
+				</div>
 				<div class="card-body">
-					<div class="row">
-						<div class="col-12">
-							<h3 class="card-title text-center bg-info">Edit Task</h3>
-						</div>
-					</div>
-					<form #taskEditForm="ngForm" class="form-horizontal form-group" ngNativeValidate>
+
+					<form #taskEditForm="ngForm" class="form-horizontal form-group"
+						ngNativeValidate>
 						<div class="form-group row">
 							<div class="col-2">
 								<label for="PrjectName">Project:</label>
 							</div>
 							<div class="col-10">
 								<input type="text" id="inputProjectName" class="form-control"
-									name="ProjectName" [(ngModel)]="masterTask.project.projectName" placeholder="Project Name"
-									readonly required autofocus>
+									name="ProjectName" [(ngModel)]="masterTask.project.projectName"
+									placeholder="Project Name" readonly required autofocus>
 							</div>
 						</div>
 
@@ -36,8 +36,8 @@
 								<label for="priority">Priorty:</label>
 							</div>
 							<div class="col-10">
-								<nouislider [tooltips]="true" name="priority" formControlName="priority"
-									[min]="0" [max]="30" [step]="1"
+								<nouislider [tooltips]="true" name="priority"
+									formControlName="priority" [min]="0" [max]="30" [step]="1"
 									[(ngModel)]="someRange"></nouislider>
 							</div>
 						</div>
@@ -47,16 +47,17 @@
 								<label for="ParentTask">Parent Task:</label>
 							</div>
 							<div [formGroup]="filterEditTaskForm" class="col-8">
-								<input type="text" id="inputParentTask" formControlName="parentTaskName" class="form-control"
-									name="Manager" placeholder="Parent Task"
-									readonly>
+								<input type="text" id="inputParentTask"
+									formControlName="parentTaskName" class="form-control"
+									name="Manager" placeholder="Parent Task" readonly>
 							</div>
 							<div class="col-2">
-								<button class="btn btn-primary button-md text-uppercase button-block"
+								<button
+									class="btn btn-primary button-md text-uppercase button-block"
 									(click)="openTaskModal()">Search</button>
 							</div>
 						</div>
-						
+
 						<div class="row" [formGroup]="filterEditTaskForm">
 							<div class="col-2">
 								<label for="StartDate">Start Date:</label>
@@ -66,7 +67,7 @@
 									[dpDayPicker]="dayPickerConfig" [displayDate]="displayDate"
 									[theme]="'dp-material'" formControlName="dateFrom"
 									[mode]="'day'" (onChange)="date = $event"
-									placeholder="Start Date"/>
+									placeholder="Start Date" />
 							</div>
 							<div class="col-2">
 								<label for="EndDate">End Date:</label>
@@ -75,29 +76,31 @@
 								<input type="text" #dateToDp="dpDayPicker"
 									[dpDayPicker]="dayPickerConfig" [displayDate]="displayDate"
 									[theme]="'dp-material'" formControlName="dateTo" [mode]="'day'"
-									(onChange)="date = $event" placeholder="End Date"/>
-									<div class="alert"
-										*ngIf="!filterEditTaskForm.controls['dateTo'].valid && filterEditTaskForm.controls['dateTo'].touched">{{ errorMessage.endDateValidationErrorMessage }}</div>
-									
+									(onChange)="date = $event" placeholder="End Date" />
+								<div class="alert"
+									*ngIf="!filterEditTaskForm.controls['dateTo'].valid && filterEditTaskForm.controls['dateTo'].touched">{{
+									errorMessage.endDateValidationErrorMessage }}</div>
+
 							</div>
 						</div>
 
-						<br/>
+						<br />
 
-						<div  class="form-group row">
+						<div class="form-group row">
 							<div class="col-2">
 								<label for="User">User:</label>
 							</div>
 							<div class="col-10">
-								<input type="text" id="inputUserName" [(ngModel)]='masterTask.user.empId'
-									name="User" class="form-control" placeholder="User" readonly required>
+								<input type="text" id="inputUserName"
+									[(ngModel)]='masterTask.user.empId' name="User"
+									class="form-control" placeholder="User" readonly required>
 							</div>
 						</div>
-						<div class="btn-group-lg float-right mx-auto">
-							<input type="button" 
-								class="btn btn-secondary"
-								(click)="updateTask()" [disabled]="taskEditForm.form.invalid || filterEditTaskForm.invalid" value="Update">
-							<input class="btn btn-secondary"
+						<div class="btn-group float-right mx-auto">
+							<input type="button" class="btn btn-secondary"
+								(click)="updateTask()"
+								[disabled]="taskEditForm.form.invalid || filterEditTaskForm.invalid"
+								value="Update"> <input class="btn btn-secondary"
 								type="reset" (click)="sendToParent(null)" value="cancel">
 						</div>
 
@@ -136,7 +139,7 @@
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="ProjectModalLabel">Task	Directory</h5>
+					<h5 class="modal-title" id="ProjectModalLabel">Task Directory</h5>
 					<button type="button" class="close" (click)="closeTaskModal()"
 						data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
@@ -144,13 +147,13 @@
 				</div>
 				<div class="modal-body">
 					<div class="table-wrapper-scroll-y">
-					<form class="form-inline">
-						<div class="form-group">
-						<label for="projectModelSearch">Search Task : </label>
-							<input type="text" id="searchTask" class="form-control" name="search"
-								[(ngModel)]="searchTask" placeholder="Search...">
-						</div>
-					</form>
+						<form class="form-inline">
+							<div class="form-group">
+								<label for="projectModelSearch">Search Task : </label> <input
+									type="text" id="searchTask" class="form-control" name="search"
+									[(ngModel)]="searchTask" placeholder="Search...">
+							</div>
+						</form>
 						<table class="table table-bordered table-hover">
 							<thead>
 								<tr>
@@ -160,7 +163,8 @@
 							<tbody>
 								<tr
 									*ngFor="let parentTask of dataHolder.getParentTaskList() | parentTaskSearchFilter: searchTask;let i = index"
-									(dblclick)="setDblClickedTaskRow(parentTask)" (click)="setClickedTaskRow(parentTask)"
+									(dblclick)="setDblClickedTaskRow(parentTask)"
+									(click)="setClickedTaskRow(parentTask)"
 									[class.active]="i == selectedTaskRow">
 									<td>{{ parentTask.parent_task }}</td>
 								</tr>
@@ -171,7 +175,7 @@
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary"
 						data-dismiss="modal" (click)="closeTaskModal()">Close</button>
-					
+
 				</div>
 			</div>
 		</div>

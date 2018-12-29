@@ -3,13 +3,12 @@
 	<div class="row">
 		<div class="col-12">
 			<div class="card">
+				<div class="card-header bg-info">
+					<h2 class="card-title text-center">View Task</h2>
+				</div>
 				<div class="card-body">
-					<div class="row">
-						<div class="col-12">
-							<h3 class="card-title text-center bg-primary">View Task</h3>
-						</div>
-					</div>
-					<form #taskForm="ngForm" class="form-horizontal form-group" ngNativeValidate>
+					<form #taskForm="ngForm" class="form-horizontal form-group"
+						ngNativeValidate>
 						<div class="form-group row">
 							<div class="col-4">
 								<div class="row">
@@ -36,24 +35,32 @@
 										<label for="sort">Sort Task By </label>
 									</div>
 									<div class="col-10">
-									<div class="row  ml-2">
-									<div class="col-3">
-									<input type="button" class="btn btn-primary text-uppercase btn-default"
-												(click)="sortTask('startDate')" [disabled]='!showData'value ="Start Date">
-									</div>
-									<div class="col-3">
-									<input type="button" class="btn btn-primary text-uppercase btn-default"
-												(click)="sortTask('endDate')" [disabled]='!showData' value ="End Date">
-									</div>
-									<div class="col-3">
-									<input type="button" class="btn btn-primary text-uppercase btn-default"
-												(click)="sortTask('priority')" [disabled]='!showData' value ="Priority">
-									</div>
-									<div class="col-3">
-									<input type="button" class="btn btn-primary text-uppercase btn-default"
-												(click)="sortTask('status')" [disabled]='!showData' value ="Completed">
-									</div>
-									</div>
+										<div class="row  ml-2">
+											<div class="col-3">
+												<input type="button"
+													class="btn btn-primary text-uppercase btn-default"
+													(click)="sortTask('startDate')" [disabled]='!showData'
+													value="Start Date">
+											</div>
+											<div class="col-3">
+												<input type="button"
+													class="btn btn-primary text-uppercase btn-default"
+													(click)="sortTask('endDate')" [disabled]='!showData'
+													value="End Date">
+											</div>
+											<div class="col-3">
+												<input type="button"
+													class="btn btn-primary text-uppercase btn-default"
+													(click)="sortTask('priority')" [disabled]='!showData'
+													value="Priority">
+											</div>
+											<div class="col-3">
+												<input type="button"
+													class="btn btn-primary text-uppercase btn-default"
+													(click)="sortTask('status')" [disabled]='!showData'
+													value="Completed">
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -85,20 +92,24 @@
 						<td><textarea style="width: 100%; height: 100%" readOnly
 								disabled="true" rows="3">{{ getParentTask(task.parentId) }}</textarea></td>
 						<td class="text-center">{{ task.priority }}</td>
-						<td class="text-center">{{ task.startDate | date : 'MM-dd-yyyy'}}</td>
-						<td class="text-center">{{ task.endDate | date : 'MM-dd-yyyy' }}</td>
+						<td class="text-center">{{ task.startDate | date :
+							'MM-dd-yyyy'}}</td>
+						<td class="text-center">{{ task.endDate | date : 'MM-dd-yyyy'
+							}}</td>
 						<td>
 							<div class="row">
 								<div class="col-5">
-									<button
-										class="btn btn-primary btn-default btn-block" [disabled] = "task.status ===1 ? true: false" (click)="editTask(task)">Edit</button>
-								
+									<button class="btn btn-primary btn-default btn-block"
+										[disabled]="task.status ===1 ? true: false"
+										(click)="editTask(task)">Edit</button>
+
 								</div>
 								<div class="col-7">
-									<button
-										class="btn btn-primary btn-default btn-block" [disabled] = "task.status ===1 ? true: false" (click)='markComplete(task)'>End Task</button>
-										
-										
+									<button class="btn btn-primary btn-default btn-block"
+										[disabled]="task.status ===1 ? true: false"
+										(click)='markComplete(task)'>End Task</button>
+
+
 								</div>
 							</div>
 
@@ -167,7 +178,6 @@
 </div>
 </ng-container>
 
-<ng-container *ngIf='!showViewTask'>
-<app-edit [childToMaster]=showViewTask [taskToEdit]=taskToEdit (childToParent)="childToParent($event)">
-</app-edit>
-</ng-container>
+<ng-container *ngIf='!showViewTask'> <app-edit
+	[childToMaster]=showViewTask [taskToEdit]=taskToEdit
+	(childToParent)="childToParent($event)"> </app-edit> </ng-container>

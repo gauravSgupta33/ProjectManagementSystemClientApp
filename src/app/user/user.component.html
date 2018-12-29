@@ -2,12 +2,10 @@
 	<div class="row">
 		<div class="col-8">
 			<div class="card">
+				<div class="card-header bg-info">
+					<h2 class="card-title text-center">Add User</h2>
+				</div>
 				<div class="card-body boarder">
-					<div class="row">
-						<div class="col-12">
-							<h3 class="card-title text-center bg-success">Add User</h3>
-						</div>
-					</div>
 					<form [formGroup]="userForm" class="form-horizontal"
 						(ngSubmit)="addUser(userForm.value)" ngNativeValidate>
 						<div class="form-group">
@@ -15,11 +13,12 @@
 								<div class="col-2 mx-auto">
 									<label for="firstName">First Name: </label>
 								</div>
-								<div class="col-10 mx-auto" >
+								<div class="col-10 mx-auto">
 									<!-- input type="text" id="inputFirstName" class="form-control"
 										name="firstName" [(ngModel)]="user.firstName"
 										placeholder="First Name" required autofocus-->
-									<input type="text" class="userInput" placeholder="First Name" formControlName="firstName">
+									<input type="text" class="userInput" placeholder="First Name"
+										formControlName="firstName">
 									<div class="alert"
 										*ngIf="!userForm.controls['firstName'].valid && userForm.controls['firstName'].touched">{{
 										errorMessage.firstNameValidationErrorMessage }}</div>
@@ -37,9 +36,11 @@
 									<!-- input type="text" id="inputLastName" class="form-control"
 										name="lastName" [(ngModel)]="user.lastName"
 										placeholder="Last Name" required-->
-									<input type="text" placeholder="Last Name" class="userInput" formControlName="lastName">
+									<input type="text" placeholder="Last Name" class="userInput"
+										formControlName="lastName">
 									<div class="alert"
-										*ngIf="!userForm.controls['lastName'].valid && userForm.controls['lastName'].touched">{{ errorMessage.lastNameValidationErrorMessage }}</div>
+										*ngIf="!userForm.controls['lastName'].valid && userForm.controls['lastName'].touched">{{
+										errorMessage.lastNameValidationErrorMessage }}</div>
 								</div>
 							</div>
 						</div>
@@ -54,15 +55,18 @@
 									<!-- input type="number" id="inputEmpId" class="form-control"
 										name="empId" [(ngModel)]="user.empId"
 										placeholder="Employee Id" required-->
-									<input type="text" class="userInput" placeholder="Employee Id" formControlName="empId">
+									<input type="text" class="userInput" placeholder="Employee Id"
+										formControlName="empId">
 									<div class="alert"
-										*ngIf="!userForm.controls['empId'].valid && userForm.controls['empId'].touched">{{ errorMessage.empIdValidationErrorMessage }}</div>
+										*ngIf="!userForm.controls['empId'].valid && userForm.controls['empId'].touched">{{
+										errorMessage.empIdValidationErrorMessage }}</div>
 								</div>
 							</div>
 						</div>
 
 						<div class="btn-group float-right mx-auto">
-							<input type="submit" class="btn btn-secondary" [value]="addOrUpdateButton" [disabled]="!userForm.valid">
+							<input type="submit" class="btn btn-secondary"
+								[value]="addOrUpdateButton" [disabled]="!userForm.valid">
 							<button class="btn btn-secondary" type="reset"
 								(click)="resetVals()">&nbsp;&nbsp;reset&nbsp;&nbsp;</button>
 						</div>

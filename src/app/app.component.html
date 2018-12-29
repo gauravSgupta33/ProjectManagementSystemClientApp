@@ -1,24 +1,40 @@
 <div class="container-fluid">
 
 	<hr>
-
-	<h2 class="mx-auto">Project Manager</h2>
-
+	<div class="card">
+		<div class="card-header">
+			<h2 class="card-title text-center">Project Management System</h2>
+		</div>
+	</div>
 	<hr>
-
-	<ul class="nav nav-tabs">
-		<li class="active"><a data-toggle="tab" routerLink='/AddProject'
-			routerLinkActive="active">Add Project</a></li>
-		<li><a routerLink='/AddTask' data-toggle="tab"
-			routerLinkActive="active">Add Task</a></li>
-		<li><a data-toggle="tab" routerLink='/AddUser'
-			routerLinkActive="active">Add User</a></li>
-		<li><a data-toggle="tab" routerLink='/ViewTask'
-			routerLinkActive="active">View Task</a></li>
-	</ul>
-
+	<div class="row ">
+		<div class="col">
+			<div class="myCard with-nav-tabs myCard-success">
+				<div class="myCard-heading">
+					<ul class="nav nav-tabs" role="tablist">
+						<li><a data-toggle="tab" routerLink='/AddProject'
+							routerLinkActive="active">Add Project</a></li>
+						<li><a routerLink='/AddTask' data-toggle="tab"
+							routerLinkActive="active">Add Task</a></li>
+						<li><a data-toggle="tab" routerLink='/AddUser'
+							routerLinkActive="active">Add User</a></li>
+						<li><a data-toggle="tab" routerLink='/ViewTask'
+							routerLinkActive="active">View Task</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<hr>
 
 </div>
-<router-outlet></router-outlet>
+
+<div class=container-fluid>
+	<div class="row">
+		<div class="col">
+			<router-outlet></router-outlet>
+		</div>
+	</div>
+
+</div>
