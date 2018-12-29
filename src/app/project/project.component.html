@@ -1,6 +1,6 @@
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-9 col-7 col-5">
+		<div class="col-7">
 			<div class="card">
 				<div class="card-body">
 					<div class="row">
@@ -8,62 +8,96 @@
 							<h3 class="card-title text-center bg-warning">Add Project</h3>
 						</div>
 					</div>
-					<form [formGroup]="projectForm" class="form-horizontal form-group"	(ngSubmit)="addProject(projectForm.value)" ngNativeValidate>
+					<form [formGroup]="projectForm" class="form-horizontal form-group"
+						(ngSubmit)="addProject(projectForm.value)" ngNativeValidate>
 						<div class="form-group mx-auto">
-							<label for="ProjectName">Project Name: </label>
-							<input type="text" class="userInput" placeholder="ProjectName" formControlName="projectName">
+							<div class="row">
+								<div class="col-2">
+									<label for="ProjectName">Project Name: </label>
+								</div>
+								<div class="col-10">
+									<input type="text" class="userInput" style="width: 60%"
+										placeholder="ProjectName" formControlName="projectName">
 									<div class="alert"
 										*ngIf="!projectForm.controls['projectName'].valid && projectForm.controls['projectName'].touched">{{
-										errorMessage.projectNameValidationErrorMessage }}</div>	
-						</div>
-						<label for="priority">Priority: </label>
-						<nouislider [tooltips]="true" name="priority" class="form-control"
-							[min]="0" [max]="30" [step]="1" [(ngModel)]= "someRange" formControlName='priority'></nouislider>
-
-							 <input type="checkbox" name="checkBox" [checked]="projectForm.get('checkBox').value" formControlName="checkBox"><label
-								for="setDate">Set Start and End Date </label>
-							<input type="text" #dateFromDp="dpDayPicker"
-								[dpDayPicker]="dayPickerConfig" [displayDate]="displayDate"
-								[theme]="'dp-material'" formControlName="dateFrom"
-								[mode]="'day'" (onChange)="date = $event" placeholder="Start Date">
-								
-								<div class="alert"
-										*ngIf="!projectForm.controls['dateFrom'].valid && projectForm.controls['dateFrom'].touched">{{ errorMessage.startDateValidationErrorMessage }}</div>
-								
-							<input type="text" #dateToDp="dpDayPicker"
-								[dpDayPicker]="dayPickerConfig" [displayDate]="displayDate"
-								[theme]="'dp-material'" formControlName="dateTo"
-								[mode]="'day'" (onChange)="date = $event" placeholder="End Date"/>
-								
-								<div class="alert"
-										*ngIf="!projectForm.controls['dateTo'].valid && projectForm.controls['dateTo'].touched">{{ errorMessage.endDateValidationErrorMessage }}</div>
-
-						<div class="form-group row mx-auto">
-							<label for="Manager">Manager : </label>
-						</div>
-						<div class="form-group row">
-							<div class="col-9">
-								<input type="number" id="inputLastName" class="form-control"
-									name="Manager" formControlName='managerId' placeholder="Manager"
-									size="12" readonly required>
-									<div class="alert"
-										*ngIf="!projectForm.controls['managerId'].valid && projectForm.controls['managerId'].touched">{{ errorMessage.empIdValidationErrorMessage }}</div>
-								</div>		
-							<div class="col-3">
-								<!--button
-									class="btn btn-primary button-md text-uppercase button-block"
-									(click)="openModal()">Search</button-->
-								<input type="button" class="btn btn-secondary text-uppercase" value="search" (click)="openModal()">	
+										errorMessage.projectNameValidationErrorMessage }}</div>
+								</div>
 							</div>
 						</div>
-						<div class="btn-group float-right mx-auto">
-							<!-- button
-								class="btn btn-primary text-uppercase"
-								(click)="addProject(project)" [disabled]="!projectForm.valid">{{addUpdateButton}}</button-->
-							<input type="submit" class="btn btn-secondary text-uppercase" [value]="addUpdateButton" [disabled]="!projectForm.valid">	
-							<button
-								class="btn btn-primary text-uppercase mx-auto"
+
+						<div class="row">
+							<div class="col-2">
+								<label for="priority">Priority: </label>
+							</div>
+							<div class="col-10">
+								<nouislider [tooltips]="true" style="width:60%" name="priority"
+									class="form-control" [min]="0" [max]="30" [step]="1"
+									[(ngModel)]="someRange" formControlName='priority'></nouislider>
+							</div>
+						</div>
+
+						<div class="row mb-4">
+							<div class="col-1 mr-0">
+								<input type="checkbox" name="checkBox"
+									[checked]="projectForm.get('checkBox').value"
+									formControlName="checkBox">
+							</div>
+							<div class="col-3 col-offset-2">
+								<label for="setDate">Set Start and End Date </label>
+							</div>
+							<div class="col-8 col-offset-3">
+								<input type="text" #dateFromDp="dpDayPicker"
+									[dpDayPicker]="dayPickerConfig" [displayDate]="displayDate"
+									[theme]="'dp-material'" formControlName="dateFrom"
+									[mode]="'day'" (onChange)="date = $event"
+									placeholder="Start Date">
+
+								<div class="alert"
+									*ngIf="!projectForm.controls['dateFrom'].valid && projectForm.controls['dateFrom'].touched">{{
+									errorMessage.startDateValidationErrorMessage }}</div>
+
+								<input type="text" #dateToDp="dpDayPicker"
+									[dpDayPicker]="dayPickerConfig" [displayDate]="displayDate"
+									[theme]="'dp-material'" formControlName="dateTo" [mode]="'day'"
+									(onChange)="date = $event" placeholder="End Date" />
+
+								<div class="alert"
+									*ngIf="!projectForm.controls['dateTo'].valid && projectForm.controls['dateTo'].touched">{{
+									errorMessage.endDateValidationErrorMessage }}</div>
+
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<div class="col-2">
+								<label for="Manager">Manager : </label>
+
+							</div>
+							<div class="col-7">
+								<input type="number" id="inputLastName" class="form-control"
+									name="Manager" formControlName='managerId'
+									placeholder="Manager" size="12" readonly required>
+								<div class="alert"
+									*ngIf="!projectForm.controls['managerId'].valid && projectForm.controls['managerId'].touched">{{
+									errorMessage.empIdValidationErrorMessage }}</div>
+							</div>
+
+							<div class="col-3">
+								<input type="button" class="btn btn-secondary text-uppercase"
+									value="search" (click)="openModal()">
+							</div>
+
+						</div>
+
+
+
+						<div class="btn-group float-right mx-auto row">
+						<div class="col">
+							<input type="submit" class="btn btn-secondary text-uppercase"
+								[value]="addUpdateButton" [disabled]="!projectForm.valid">
+							<button class="btn btn-primary text-uppercase mx-auto"
 								type="reset" (click)="performAdditionalReset()">&nbsp;&nbsp;reset&nbsp;&nbsp;</button>
+								</div>
 						</div>
 
 					</form>
@@ -73,12 +107,12 @@
 	</div>
 	<hr>
 	<div class="row">
-		<div class="col-12 col-7 col-6">
+		<div class="col-8">
 			<div class="card">
 				<div class="card-body">
 					<div class="row">
 						<div class="col-12">
-							<input type="text" id="search" class="form-control" name="search"
+							<input type="text" id="search" class="form-control" style="width:50%" name="search"
 								[(ngModel)]="search" placeholder="Search...">
 						</div>
 					</div>
@@ -88,7 +122,7 @@
 	</div>
 
 	<div class="row">
-		<div class="col-12 col-9 col-6">
+		<div class="col-8">
 			<div class="card">
 				<div class="card-body">
 					<div class="row">
@@ -96,18 +130,20 @@
 							<label for="sort">Sort: </label>
 						</div>
 						<div class="col-3 mx-auto">
-							<button class="btn btn-primary text-uppercase" (click)="sortProject('startDate')">Start
-								Date</button>
+							<button class="btn btn-primary text-uppercase"
+								(click)="sortProject('startDate')">Start Date</button>
 						</div>
 						<div class="col-2 mx-auto">
-							<button class="btn btn-primary text-uppercase" (click)="sortProject('endDate')">End
-								Date</button>
+							<button class="btn btn-primary text-uppercase"
+								(click)="sortProject('endDate')">End Date</button>
 						</div>
 						<div class="col-2 mx-auto">
-							<button class="btn btn-primary text-uppercase" (click)="sortProject('priority')">Priority</button>
+							<button class="btn btn-primary text-uppercase"
+								(click)="sortProject('priority')">Priority</button>
 						</div>
 						<div class="col-3 mx-auto">
-							<button class="btn btn-primary text-uppercase" (click)="sortProject('completed')">Completed</button>
+							<button class="btn btn-primary text-uppercase"
+								(click)="sortProject('completed')">Completed</button>
 						</div>
 					</div>
 				</div>
@@ -115,126 +151,133 @@
 		</div>
 	</div>
 
-	<div class="row" *ngFor="let prj of dataHolder.getProjectList() | SortBy :{property:sortType, direction: direction} | projectSearchFilter:search;let i = index">
-		<div class="col-12 col-9 col-6">
+	<div class="row"
+		*ngFor="let prj of dataHolder.getProjectList() | SortBy :{property:sortType, direction: direction} | projectSearchFilter:search;let i = index">
+		<div class="col-8">
 			<div class="card">
 				<div class="card-body border">
-						<div class="row border justify-content-start">
-							<div class="col-8 border">
-								<br/>
-								<div class="row mb-1">
-									<div class="col-3">
-										<label for="ProjectName">Project:</label>
-									</div>
-									<div class="col-9">
-										<label class="border text-left pl-3" style="width:100%;height:3%" > {{ prj.projectName }} </label>
-									</div>
+					<div class="row border justify-content-start">
+						<div class="col-8 border">
+							<br />
+							<div class="row mb-1">
+								<div class="col-3">
+									<label for="ProjectName">Project:</label>
 								</div>
-								<br />
-								<div class="row ustify-content-around">
-									<div class="col-6">
-										<div class="row justify-content-start">
-											<div class="col-7">
-												<label for="taskCount">No of Tasks:</label>
-											</div>
-											<div class="col-5">
-												<!-- input type="text" id="taskCountIn" class="form-control"
+								<div class="col-9">
+									<label class="border text-left pl-3"
+										style="width: 100%; height: 3%"> {{ prj.projectName
+										}} </label>
+								</div>
+							</div>
+							<br />
+							<div class="row ustify-content-around">
+								<div class="col-6">
+									<div class="row justify-content-start">
+										<div class="col-7">
+											<label for="taskCount">No of Tasks:</label>
+										</div>
+										<div class="col-5">
+											<!-- input type="text" id="taskCountIn" class="form-control"
 													name="taskCountIn" placeholder="task Count In"
 													[disabled]="true"-->
-											<label class="border text-left pl-5" style="width:100%" > {{ getTotalTaskCount(prj.projectId) }} </label>		
-											</div>
-										</div>
-									</div>
-									<div class="col-6">
-										<div class="row justify-content-start">
-											<div class="col-7 mx-auto">
-												<label for="Completed">Completed:</label>
-											</div>
-											<div class="col-5">
-												<label class="border text-left pl-5" style="width:100%" > {{ getCompletedTaskCount(prj.projectId) }} </label>
-											</div>
+											<label class="border text-left pl-5" style="width: 100%">
+												{{ getTotalTaskCount(prj.projectId) }} </label>
 										</div>
 									</div>
 								</div>
-								<br />
-								<div class="row justify-content-start">
-									<div class="col-6">
-										<div class="row">
-											<div class="col-4">
-												<label for="startDate">Start Date:</label>
-											</div>
-											<div class="col-8">
-											<label class="border text-left pl-3" style="width:100%" > {{ prj.startDate | date : 'MM-dd-yyyy' }} </label>
-											</div>
+								<div class="col-6">
+									<div class="row justify-content-start">
+										<div class="col-7 mx-auto">
+											<label for="Completed">Completed:</label>
 										</div>
-									</div>
-									<div class="col-6">
-										<div class="row justify-content-start">
-											<div class="col-4 mx-auto">
-												<label for="EndDate">End Date:</label>
-											</div>
-											<div class="col-8">
-												<label class="border text-left pl-3" style="width:100%" > {{ prj.endDate | date : 'MM-dd-yyyy' }} </label>
-											</div>
+										<div class="col-5">
+											<label class="border text-left pl-5" style="width: 100%">
+												{{ getCompletedTaskCount(prj.projectId) }} </label>
 										</div>
 									</div>
 								</div>
 							</div>
-							<div class="col-2 border mx-auto">
-							<br/>
-							<br/>
-							<div class="row">
-							<div class="col-12">
-										<div class="row justify-content-start">
-											<div class="col-12 mx-auto">
-												<label class="text-center" for="Priority">Priority:</label>
-											</div>
+							<br />
+							<div class="row justify-content-start">
+								<div class="col-6">
+									<div class="row">
+										<div class="col-4">
+											<label for="startDate">Start Date:</label>
+										</div>
+										<div class="col-8">
+											<label class="border text-left pl-3" style="width: 100%">
+												{{ prj.startDate | date : 'MM-dd-yyyy' }} </label>
 										</div>
 									</div>
-							</div>
-							
-							<div class="row mb-auto">
-							<div class="col-12">
-										<div class="row justify-content-start">
-											<div class="col-12">
-												<label class="border text-center pt-3" style="width:100%;height:10%">  {{ prj.priority }} </label>
-											</div>
+								</div>
+								<div class="col-6">
+									<div class="row justify-content-start">
+										<div class="col-4 mx-auto">
+											<label for="EndDate">End Date:</label>
+										</div>
+										<div class="col-8">
+											<label class="border text-left pl-3" style="width: 100%">
+												{{ prj.endDate | date : 'MM-dd-yyyy' }} </label>
 										</div>
 									</div>
+								</div>
 							</div>
-							</div>
-							
-							<div class="col-2 border mx-auto">
-							<br/>
-							<br/>
-							<div class="row">
-							<div class="col-12">
-										<div class="row justify-content-start">
-											<div class="col-mx-12">
-												<!--button type="button" class="btn btn-primary text-uppercase" (click)='updateProject(prj, i)'>Update</button-->
-												<input type="button" class="btn btn-secondary text-uppercase" value="Update" (click)='updateProject(prj, i)'>	
-
-											</div>
-										</div>
-									</div>
-							</div>
-							<br/>
-							<br/>
-							
-							<div class="row mb-auto">
-							<div class="col-12">
-										<div class="row justify-content-start mb-auto">
-											<div class="col-mx-12 mx-12">
-												<button type="button" class="btn btn-primary text-uppercase">Suspend</button>
-											</div>
-										</div>
-									</div>
-							</div>
-							
-							
-							</div>
-							
 						</div>
+						<div class="col-2 border mx-auto">
+							<br /> <br />
+							<div class="row">
+								<div class="col-12">
+									<div class="row justify-content-start">
+										<div class="col-12 mx-auto">
+											<label class="text-center" for="Priority">Priority:</label>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="row mb-auto">
+								<div class="col-12">
+									<div class="row justify-content-start">
+										<div class="col-12">
+											<label class="border text-center pt-3"
+												style="width: 100%; height: 10%"> {{ prj.priority }}
+											</label>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-2 border mx-auto">
+							<br /> <br />
+							<div class="row">
+								<div class="col-12">
+									<div class="row justify-content-start">
+										<div class="col-mx-12">
+											<!--button type="button" class="btn btn-primary text-uppercase" (click)='updateProject(prj, i)'>Update</button-->
+											<input type="button" class="btn btn-secondary text-uppercase"
+												value="Update" (click)='updateProject(prj, i)'>
+
+										</div>
+									</div>
+								</div>
+							</div>
+							<br /> <br />
+
+							<div class="row mb-auto">
+								<div class="col-12">
+									<div class="row justify-content-start mb-auto">
+										<div class="col-mx-12 mx-12">
+											<button type="button" class="btn btn-primary text-uppercase">Suspend</button>
+										</div>
+									</div>
+								</div>
+							</div>
+
+
+						</div>
+
+					</div>
 				</div>
 			</div>
 		</div>
@@ -253,9 +296,7 @@
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			<div class="modal-body">
-				{{ addUpdateButton }} successful!!!!
-			</div>
+			<div class="modal-body">{{ addUpdateButton }} successful!!!!</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-outline-dark"
 					(click)="openDialog()">Close</button>
@@ -281,12 +322,12 @@
 
 					<form class="form-inline">
 						<div class="form-group">
-						<label for="projectModelSearch">Search Project : </label>
-							<input type="text" id="search" class="form-control" name="search"
+							<label for="projectModelSearch">Search Project : </label> <input
+								type="text" id="search" class="form-control" name="search"
 								[(ngModel)]="searchUser" placeholder="Search...">
 						</div>
 					</form>
-					
+
 					<table class="table table-bordered table-hover">
 						<thead>
 							<tr>
@@ -296,8 +337,10 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr *ngFor="let user of dataHolder.getUserList() | userFilter : searchUser ;let i = index"
-								(dblclick)="setDblClickedRow(user)" (click)="setClickedRow(user)" [class.active]="i == selectedRow">
+							<tr
+								*ngFor="let user of dataHolder.getUserList() | userFilter : searchUser ;let i = index"
+								(dblclick)="setDblClickedRow(user)"
+								(click)="setClickedRow(user)" [class.active]="i == selectedRow">
 								<td>{{ user.empId }}</td>
 								<td>{{ user.firstName}}</td>
 								<td>{{ user.lastName}}</td>

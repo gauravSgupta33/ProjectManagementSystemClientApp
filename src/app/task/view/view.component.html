@@ -1,7 +1,7 @@
 <ng-container *ngIf='showViewTask'>
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-12 col-9 col-9">
+		<div class="col-12">
 			<div class="card">
 				<div class="card-body">
 					<div class="row">
@@ -11,7 +11,7 @@
 					</div>
 					<form #taskForm="ngForm" class="form-horizontal form-group" ngNativeValidate>
 						<div class="form-group row">
-							<div class="col-5">
+							<div class="col-4">
 								<div class="row">
 									<div class="col-2">
 										<label for="PrjectName">Project:</label>
@@ -30,24 +30,30 @@
 									</div>
 								</div>
 							</div>
-							<div class="col-7 mx-auto">
-								<div class="row">
-									<div class="col-4">
+							<div class="col-8">
+								<div class="row  ml-2">
+									<div class="col-2">
 										<label for="sort">Sort Task By </label>
 									</div>
-									<div class="col-8">
-										<div class="btn-group mx-auto">
-											<button class="btn btn-primary text-uppercase btn-default"
-												(click)="sortTask('startDate')" [disabled]='!showData'>Start
-												Date</button>
-											<button class="btn btn-primary text-uppercase btn-default"
-												(click)="sortTask('endDate')" [disabled]='!showData'>End
-												Date</button>
-											<button class="btn btn-primary text-uppercase btn-default"
-												(click)="sortTask('priority')" [disabled]='!showData'>Priority</button>
-											<button class="btn btn-primary text-uppercase btn-default"
-												(click)="sortTask('status')" [disabled]='!showData'>Completed</button>
-										</div>
+									<div class="col-10">
+									<div class="row  ml-2">
+									<div class="col-3">
+									<input type="button" class="btn btn-primary text-uppercase btn-default"
+												(click)="sortTask('startDate')" [disabled]='!showData'value ="Start Date">
+									</div>
+									<div class="col-3">
+									<input type="button" class="btn btn-primary text-uppercase btn-default"
+												(click)="sortTask('endDate')" [disabled]='!showData' value ="End Date">
+									</div>
+									<div class="col-3">
+									<input type="button" class="btn btn-primary text-uppercase btn-default"
+												(click)="sortTask('priority')" [disabled]='!showData' value ="Priority">
+									</div>
+									<div class="col-3">
+									<input type="button" class="btn btn-primary text-uppercase btn-default"
+												(click)="sortTask('status')" [disabled]='!showData' value ="Completed">
+									</div>
+									</div>
 									</div>
 								</div>
 							</div>
@@ -61,7 +67,7 @@
 
 	<div class="row-fluid">
 
-		<div class="col-12 col-9 col-9">
+		<div class="col-10 col-offset-2">
 			<div class="row" *ngIf='showData'>
 				<table class="table table-bordered" width="90%">
 					<tr class="text-center">

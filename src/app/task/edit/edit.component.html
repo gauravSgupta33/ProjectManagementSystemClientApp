@@ -94,12 +94,11 @@
 							</div>
 						</div>
 						<div class="btn-group-lg float-right mx-auto">
-							<button
-								class="btn btn-primary button-md text-uppercase badge-pill button-block mx-auto"
-								(click)="updateTask()" [disabled]="taskEditForm.form.invalid || filterEditTaskForm.invalid">Update</button>
-							<button
-								class="btn btn-primary button-md text-uppercase badge-pill button-block mx-auto"
-								type="reset" (click)="sendToParent(null)">&nbsp;&nbsp;Cancel&nbsp;&nbsp;</button>
+							<input type="button" 
+								class="btn btn-secondary"
+								(click)="updateTask()" [disabled]="taskEditForm.form.invalid || filterEditTaskForm.invalid" value="Update">
+							<input class="btn btn-secondary"
+								type="reset" (click)="sendToParent(null)" value="cancel">
 						</div>
 
 					</form>
