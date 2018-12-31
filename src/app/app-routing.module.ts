@@ -5,7 +5,7 @@ import { PrjoectModalSearchFilterPipe } from './common/ProjectModelSerachFilterP
 import { AppContext } from './common/appcontext';
 import { ErrorMessage } from './common/errormessage';
 import { UserFilterPipe } from './common/filterpipe';
-import { ErrorDisplayComponent } from './error-display/error-display.component';
+//import { ErrorDisplayComponent } from './error-display/error-display.component';
 import { GlobalErrorHandlerService } from './global-error-handler.service';
 import {ProjectComponent} from './project/project.component';
 import { ParentTaskService } from './services/parent-task.service';

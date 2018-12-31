@@ -33,9 +33,9 @@ export class EditComponent implements OnInit {
   @ViewChild('dateToDp') public dateToDp: DatePickerComponent;
 
   // getting value from parent to child
-  @Input('childToMaster') masterName: boolean;
+  @Input('showViewTask') showViewTask: boolean;
 
-  @Input('taskToEdit') masterTask: Task;
+  @Input('taskToEdit') taskToEdit: Task;
 
   @Output() childToParent = new EventEmitter<object>();
 
@@ -65,11 +65,12 @@ export class EditComponent implements OnInit {
     format: 'MM-DD-YYYY',
     monthFormat: 'MMMM, YYYY',
     firstDayOfWeek: 'mo',
-    disabled: true
+    disabled: true,
+    disableKeypress: true
   };
 
   sendToParent(object) {
-    this.childToParent.emit({editedTask: this.masterTask, status: true});
+    this.childToParent.emit({editedTask: this.taskToEdit, status: true});
   }
 
 
@@ -105,15 +106,15 @@ export class EditComponent implements OnInit {
       // this.dateToDp.displayDate = value; // DateTo
       this.dateToDp.minDate = value;
       this.dayPickerConfig = {
-        min: value,
+        //min: value,
         ...this.dayPickerConfig
       };
     });
-    console.log(this.masterTask);
-    this.filterEditTaskForm.get('dateFrom').setValue(new DatePipe('en-US').transform(this.masterTask.startDate, 'MM-dd-yyyy'));
-    this.filterEditTaskForm.get('dateTo').setValue(new DatePipe('en-US').transform(this.masterTask.endDate, 'MM-dd-yyyy'));
-    this.dataHolder.getParentTaskById(this.masterTask.parentId);
-    this.filterEditTaskForm.get('parentTaskName').patchValue(this.dataHolder.getParentTaskById(this.masterTask.parentId));
+    console.log(this.taskToEdit);
+    this.filterEditTaskForm.get('dateFrom').setValue(new DatePipe('en-US').transform(this.taskToEdit.startDate, 'MM-dd-yyyy'));
+    this.filterEditTaskForm.get('dateTo').setValue(new DatePipe('en-US').transform(this.taskToEdit.endDate, 'MM-dd-yyyy'));
+    this.dataHolder.getParentTaskById(this.taskToEdit.parentId);
+    this.filterEditTaskForm.get('parentTaskName').patchValue(this.dataHolder.getParentTaskById(this.taskToEdit.parentId));
 
 
 
@@ -123,20 +124,24 @@ export class EditComponent implements OnInit {
 
 
   updateTask() {
-    if (!this.validateDate()) {
+    //    if (!this.validateDate()) {
+    //
+    //      return;
+    //    }
 
+    this.taskToEdit.priority = this.filterEditTaskForm.value.priority;
+    this.taskToEdit.startDate = new Date(this.filterEditTaskForm.value.dateFrom);
+    this.taskToEdit.endDate = new Date(this.filterEditTaskForm.value.dateTo);
+
+    if (!this.validateDate()) {
       return;
     }
 
-    this.masterTask.priority = this.filterEditTaskForm.value.priority;
-    this.masterTask.startDate = new Date(this.filterEditTaskForm.value.dateFrom);
-    this.masterTask.endDate = new Date(this.filterEditTaskForm.value.dateTo);
-
-    this.taskService.updateTask(this.masterTask.taskId, this.masterTask).subscribe(data => {
-      const tasks1 = this.dataHolder.getTaskByProjectId(this.masterTask.project.projectId);
+    this.taskService.updateTask(this.taskToEdit.taskId, this.taskToEdit).subscribe(data => {
+      const tasks1 = this.dataHolder.getTaskByProjectId(this.taskToEdit.project.projectId);
 
       for (let i = 0; i < tasks1.length; i++) {
-        if (tasks1[i].taskId === this.masterTask.taskId) {
+        if (tasks1[i].taskId === this.taskToEdit.taskId) {
           tasks1[i] = data;
         }
       }
@@ -149,20 +154,39 @@ export class EditComponent implements OnInit {
 
 
   validateDate() {
-
-    if (this.filterEditTaskForm.value.dateFrom === null && this.filterEditTaskForm.value.dateTo != null) {
+    const startDate = this.filterEditTaskForm.value.dateFrom;
+    const endDate = this.filterEditTaskForm.value.dateTo;
+    if ((startDate === null || startDate === '') && this.taskToEdit.endDate != null) {
       try {
-        const d = new Date(this.filterEditTaskForm.value.dateFrom);
-        alert('Start date cannot be blank');
+        const d = new Date(this.taskToEdit.endDate);
       } catch (e) {
-
+        alert('Start date cannot be blank');
+        return false;
       }
+      alert('Start date cannot be blank');
 
       return false;
     }
-    const stDate = new Date(this.filterEditTaskForm.value.dateFrom);
-    const edDate = new Date(this.filterEditTaskForm.value.dateTo);
+    if (this.taskToEdit.startDate != null && (endDate === null || endDate === '')) {
+      try {
+        const d = new Date(this.taskToEdit.endDate);
+
+      } catch (e) {
+        alert('End date cannot be blank');
+        return false;
+      }
+      alert('End date cannot be blank');
+
+      return false;
+    }
+    const stDate = new Date(this.taskToEdit.startDate);
+    const edDate = new Date(this.taskToEdit.endDate);
     if (stDate > edDate) {
+      alert('Start date cannot be greater than end date. Please correct the date');
+      return false;
+    }
+
+    if (edDate < stDate) {
       alert('Start date cannot be greater than end date. Please correct the date');
       return false;
     }
@@ -180,7 +204,7 @@ export class EditComponent implements OnInit {
   closeTaskModal() {
     if (this.tempTask != null) {
       this.filterEditTaskForm.get('parentTaskName').patchValue(this.tempTask.parent_task);
-      this.masterTask.parentId = this.tempTask.parent_ID;
+      this.taskToEdit.parentId = this.tempTask.parent_ID;
 
     }
     this.showTaskModal = false;
@@ -189,7 +213,7 @@ export class EditComponent implements OnInit {
 
   setDblClickedTaskRow(task) {
     this.filterEditTaskForm.get('parentTaskName').patchValue(task.parent_task);
-    this.masterTask.parentId = task.parent_ID;
+    this.taskToEdit.parentId = task.parent_ID;
 
     this.showTaskModal = false;
   }
@@ -197,7 +221,7 @@ export class EditComponent implements OnInit {
   setClickedTaskRow(task) {
     this.tempTask = task;
     this.filterEditTaskForm.get('parentTaskName').patchValue(task.parent_task);
-    this.masterTask.parentId = task.parent_ID;
+    this.taskToEdit.parentId = task.parent_ID;
   }
 
 

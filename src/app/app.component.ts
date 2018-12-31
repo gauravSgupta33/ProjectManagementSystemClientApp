@@ -15,6 +15,8 @@ export class AppComponent implements OnInit {
   name: string;
   notification: string;
   showNotification: boolean;
+  
+  projectTitle = 'Project Management System';
 
   constructor(private dataHolder: DataHolder, private userService: UserService, private projectService: ProjectService, private parentTaskService: ParentTaskService, private taskService: TasksService) {
     this.name = 'ProjectManagement';

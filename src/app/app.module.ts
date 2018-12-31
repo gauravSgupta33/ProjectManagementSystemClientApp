@@ -25,7 +25,7 @@ import { UserService } from './services/user-service.service';
 import { RouterModule } from '@angular/router';
 import { NgDatepickerModule } from 'ng2-datepicker';
 import { EditComponent } from './task/edit/edit.component';
-import { ErrorDisplayComponent } from './error-display/error-display.component';
+//import { ErrorDisplayComponent } from './error-display/error-display.component';
 
 
 @NgModule({

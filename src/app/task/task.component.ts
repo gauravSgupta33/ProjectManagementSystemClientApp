@@ -71,7 +71,8 @@ export class TaskComponent implements OnInit {
     format: 'MM-DD-YYYY',
     monthFormat: 'MMMM, YYYY',
     firstDayOfWeek: 'mo',
-    disabled: true
+    disabled: true,
+    disableKeypress: true
   };
 
   constructor(private fb: FormBuilder, private dataHolder: DataHolder,
@@ -121,7 +122,6 @@ export class TaskComponent implements OnInit {
       taskName: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(100)])],
       parentTaskCheckBox: new FormControl(false)
     });
-
   }
 
 
@@ -145,7 +145,7 @@ export class TaskComponent implements OnInit {
           this.taskForm.get('dateFrom')['enable']();
           this.taskForm.get('dateFrom').setValidators([Validators.required]);
           this.taskForm.get('dateTo')['enable']();
-          this.taskForm.get('dateTo').setValidators(Validators.compose([Validators.required,  DateValidator.bind('dateFrom', 'dateTo')]));
+          this.taskForm.get('dateTo').setValidators(Validators.compose([Validators.required, DateValidator.bind('dateFrom', 'dateTo')]));
           this.taskForm.get('userName').setValidators([Validators.required]);
           this.taskForm.get('priority')['enable']();
           this.taskForm.get('priority').setValidators([Validators.required]);

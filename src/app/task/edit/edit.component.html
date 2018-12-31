@@ -15,7 +15,7 @@
 							</div>
 							<div class="col-10">
 								<input type="text" id="inputProjectName" class="form-control"
-									name="ProjectName" [(ngModel)]="masterTask.project.projectName"
+									name="ProjectName" [(ngModel)]="taskToEdit.project.projectName"
 									placeholder="Project Name" readonly required autofocus>
 							</div>
 						</div>
@@ -26,7 +26,7 @@
 							</div>
 							<div class="col-10">
 								<input type="text" id="TaskName" class="form-control"
-									name="TaskName" [(ngModel)]="masterTask.taskName"
+									name="TaskName" [(ngModel)]="taskToEdit.taskName"
 									placeholder="Task Name" required>
 							</div>
 						</div>
@@ -92,7 +92,7 @@
 							</div>
 							<div class="col-10">
 								<input type="text" id="inputUserName"
-									[(ngModel)]='masterTask.user.empId' name="User"
+									[(ngModel)]='taskToEdit.user.empId' name="User"
 									class="form-control" placeholder="User" readonly required>
 							</div>
 						</div>

@@ -65,7 +65,8 @@ export class ProjectComponent implements OnInit {
     format: 'MM-DD-YYYY',
     monthFormat: 'MMMM, YYYY',
     firstDayOfWeek: 'mo',
-    disabled: true
+    disabled: true,
+    disableKeypress: true
   };
 
   constructor(private fb: FormBuilder, private dataHolder: DataHolder,

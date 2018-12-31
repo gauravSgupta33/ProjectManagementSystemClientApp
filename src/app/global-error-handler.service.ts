@@ -1,4 +1,4 @@
-import { ErrorDisplayComponent } from './error-display/error-display.component';
+//import { ErrorDisplayComponent } from './error-display/error-display.component';
 import {Injectable, ErrorHandler, Injector} from '@angular/core';
 import {HttpErrorResponse} from '@angular/common/http';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';

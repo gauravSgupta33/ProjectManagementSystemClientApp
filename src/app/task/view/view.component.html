@@ -179,5 +179,5 @@
 </ng-container>
 
 <ng-container *ngIf='!showViewTask'> <app-edit
-	[childToMaster]=showViewTask [taskToEdit]=taskToEdit
+	[showViewTask]='showViewTask' [taskToEdit]='taskToEdit'
 	(childToParent)="childToParent($event)"> </app-edit> </ng-container>

@@ -1,15 +1,16 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { TaskService } from './task.service';
+import { TasksService } from './task.service';
+import {TasksServiceMock} from './mocks/task-service-mock';
 
-describe('TaskService', () => {
+describe('TasksService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [TaskService]
+      providers: [{provide: TasksService, useClass:TasksServiceMock}]
     });
   });
 
-  it('should be created', inject([TaskService], (service: TaskService) => {
+  it('should be created', inject([TasksService], (service: TasksService) => {
     expect(service).toBeTruthy();
   }));
 });
