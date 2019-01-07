@@ -1,4 +1,9 @@
-<div class="container-fluid">
+<div class="container-fluid" *ngIf='loading'>
+		    <ng4-loading-spinner></ng4-loading-spinner>
+
+</div>
+
+<div class="container-fluid" *ngIf="!loading">
 
 	<hr>
 	<div class="card">

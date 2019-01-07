@@ -25,11 +25,12 @@ import { UserService } from './services/user-service.service';
 import { RouterModule } from '@angular/router';
 import { NgDatepickerModule } from 'ng2-datepicker';
 import { EditComponent } from './task/edit/edit.component';
+import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 //import { ErrorDisplayComponent } from './error-display/error-display.component';
 
 
 @NgModule({
-  imports: [AppRoutingModule, BrowserModule, FormsModule, ReactiveFormsModule, HttpClientModule, AngularFontAwesomeModule, NgbModule],
+  imports: [AppRoutingModule, BrowserModule, FormsModule, ReactiveFormsModule, HttpClientModule, AngularFontAwesomeModule, NgbModule, Ng4LoadingSpinnerModule],
   declarations: [AppComponent],
   bootstrap: [AppComponent],
   providers: [DataHolder, UserService, ProjectService, ParentTaskService, GlobalErrorHandlerService, TasksService,
