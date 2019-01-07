@@ -7,6 +7,7 @@ import {ParentTaskVO} from '../model/ParentTaskVO';
 import * as cloneDeep from 'lodash.cloneDeep';
 import {Task} from '../model/Task';
 import {TaskCounterVO} from '../model/TaskCounterVO';
+import {Tab} from '../model/tab';
 
 export class DataHolder {
   private userList: Array<UserVO> = [];
@@ -20,6 +21,17 @@ export class DataHolder {
   private projectMap = new Map<number, ProjectVO>();
   private parentTaskMap = new Map<number, ParentTaskVO>();
   private projectTaskCountMap = new Map<number, TaskCounterVO>();
+  private editTab = false;
+  private tabs: Array<Tab> = [];
+
+
+  public showEditTab() {
+    return this.editTab;
+  }
+
+  public setShowEditTab(editTab) {
+    this.editTab = editTab;
+  }
 
   public isProjectListLoaded() {
     return this.projectListLoaded;
@@ -38,11 +50,17 @@ export class DataHolder {
     this.userMap.set(user.id, user);
   }
 
+  //  addAllUser(users) {
+  //    this.userList = cloneDeep(users);
+  //    for (let i = 0; i < this.userList.length; i++) {
+  //      this.userMap.set(this.userList[i].id, this.userList[i]);
+  //    }
+  //    this.userListLoaded = true;
+  //  }
+
   addAllUser(users) {
-    this.userList = cloneDeep(users);
-    for (let i = 0; i < this.userList.length; i++) {
-      this.userMap.set(this.userList[i].id, this.userList[i]);
-    }
+    console.log(users);
+    this.userMap = users;
     this.userListLoaded = true;
   }
 
@@ -84,7 +102,7 @@ export class DataHolder {
 
   addAllProjects(projects) {
     this.projectList = cloneDeep(projects);
-    for(let i = 0; i< projects.length;i ++) {
+    for (let i = 0; i < projects.length; i++) {
       this.projectMap.set(projects[i].projectId, projects[i]);
     }
     this.projectListLoaded = true;
@@ -101,7 +119,7 @@ export class DataHolder {
 
   addAllParentTasks(parentTasks) {
     this.parentTaskList = cloneDeep(parentTasks);
-    for(let i = 0; i< parentTasks.length;i ++) {
+    for (let i = 0; i < parentTasks.length; i++) {
       this.parentTaskMap.set(parentTasks[i].parent_ID, parentTasks[i]);
     }
 
@@ -109,13 +127,13 @@ export class DataHolder {
   }
 
   getParentTaskById(id) {
-//    for (let i = 0; i < this.parentTaskList.length; i++) {
-//      if (this.parentTaskList[i].parent_ID == id) {
-//        return this.parentTaskList[i].parent_task;
-//      }
-//
-//    }
-    if(this.parentTaskMap.has(id)) {
+    //    for (let i = 0; i < this.parentTaskList.length; i++) {
+    //      if (this.parentTaskList[i].parent_ID == id) {
+    //        return this.parentTaskList[i].parent_task;
+    //      }
+    //
+    //    }
+    if (this.parentTaskMap.has(id)) {
       return this.parentTaskMap.get(id).parent_task;
     }
     return ' No Parent Task Assigned ';
@@ -167,5 +185,38 @@ export class DataHolder {
       taskCounterVO.completedCount = taskCounterVO.completedCount + 1;
       this.projectTaskCountMap.set(projectId, taskCounterVO);
     }
+  }
+
+  addTab(text, path) {
+    this.tabs.push({text: text, link: path, styleClass: 'nav-link'});
+  }
+
+  updateTabStyle(text, style) {
+    this.tabs.forEach((link, index) => {
+      if (link.text === text) {
+        console.log("updating class style");
+        link.styleClass = style;
+      }
+    });
+    
+    console.log(this.tabs);
+
+  }
+
+  addTabWithStyle(text, path, style) {
+    this.tabs.push({text: text, link: path, styleClass: style});
+  }
+
+
+  removeTab(text) {
+    this.tabs.forEach((link, index) => {
+      if (link.text === text) {
+        this.tabs.splice(index, 1);
+      }
+    });
+  }
+
+  getAllTabs() {
+    return this.tabs;
   }
 }

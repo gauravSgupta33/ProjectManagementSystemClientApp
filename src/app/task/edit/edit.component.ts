@@ -70,6 +70,8 @@ export class EditComponent implements OnInit {
   };
 
   sendToParent(object) {
+    this.dataHolder.setShowEditTab(false);
+    this.dataHolder.removeTab("Edit Task");
     this.childToParent.emit({editedTask: this.taskToEdit, status: true});
   }
 
@@ -145,7 +147,7 @@ export class EditComponent implements OnInit {
           tasks1[i] = data;
         }
       }
-
+      //this.dataHolder.setShowEditTab(false);
       this.taskStatus = 'Task Add Status';
       this.success = true;
       this.sendToParent(null);

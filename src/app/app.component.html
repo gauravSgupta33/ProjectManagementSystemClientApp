@@ -12,14 +12,19 @@
 			<div class="myCard with-nav-tabs myCard-success">
 				<div class="myCard-heading">
 					<ul class="nav nav-tabs" role="tablist">
-						<li class="nav-item"><a class="nav-link" data-toggle="tab" routerLink='/AddProject'
+						<!-- >li class="nav-item"><a class="nav-link" data-toggle="tab" routerLink='/AddProject'
 							routerLinkActive="active">Add Project</a></li>
 						<li class="nav-item"><a class="nav-link" routerLink='/AddTask' data-toggle="tab"
 							routerLinkActive="active">Add Task</a></li>
 						<li class="nav-item"><a class="nav-link" data-toggle="tab" routerLink='/AddUser'
 							routerLinkActive="active">Add User</a></li>
 						<li class="nav-item"><a class="nav-link" data-toggle="tab" routerLink='/ViewTask'
-							routerLinkActive="active">View Task</a></li>
+							routerLinkActive="active" (click)="helloWorld()">View Task</a></li-->
+						<li class="nav-item" *ngFor='let tab of dataHolder.getAllTabs()'>
+						<a [ngClass]="tab.styleClass" data-toggle="tab" [routerLink] = "tab.link"
+							routerLinkActive="active" (click)="handleTab(tab.text)" >{{ tab.text }} </a></li>
+						<!-- li *ngIf="dataHolder.showEditTab()" class="nav-item"  [ngClass]="{active: dataHolder.showEditTab() === true}"><a class="nav-link" data-toggle="tab" routerLink='/ViewTask'
+							routerLinkActive="active">Edit Task</a></li-->	
 					</ul>
 				</div>
 			</div>

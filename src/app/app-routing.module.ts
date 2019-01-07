@@ -45,6 +45,10 @@ const routes: Routes = [
     path: 'ViewTask',
     component: ViewComponent,
   },
+  {
+    path: 'EditTask',
+    component: EditComponent,
+  },
 ];
 
 @NgModule({

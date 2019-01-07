@@ -30,7 +30,7 @@ export class UserServiceMock {
     this.counter = this.counter + 1;
     user.id = this.counter;
     this.userMap.set(user.id, user);
-    return user;
+    return Observable.of(user);
   }
 
   removeUser(user): Observable<boolean> {
@@ -39,10 +39,10 @@ export class UserServiceMock {
 
   editUser(id, user): Observable<UserVO> {
     this.userMap.set(id, user);
-    return user;
+    return Observable.of(user);;
   }
 
-  addOrUpdateProjectDetailsForUser(user): UserVO {
-    return user;
+  addOrUpdateProjectDetailsForUser(user): Observable<UserVO> {
+    return Observable.of(user);;
   }
 }

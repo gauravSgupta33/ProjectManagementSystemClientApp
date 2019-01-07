@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ViewComponent } from './view.component';
+import {ViewComponent} from './view.component';
 
 import {DataHolder} from '../../common/DataHolder';
 import {ErrorMessage} from '../../common/errormessage';
@@ -11,6 +11,11 @@ import {HttpErrorResponse} from '@angular/common/http';
 import {FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
+import {DpDatePickerModule} from 'ng2-date-picker';
+import {NouisliderModule} from 'ng2-nouislider';
+import {NgDatepickerModule} from 'ng2-datepicker';
+import {AngularFontAwesomeModule} from 'angular-font-awesome/dist';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import {NgbdModalContent} from '../../dialog/modal/modal-component';
 import {ViewChild} from '@angular/core';
@@ -22,23 +27,25 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {DateValidator} from '../../validator/DateValidator';
-import { EditComponent } from '../edit/edit.component';
+import {EditComponent} from '../edit/edit.component';
 
 
-import {ParentTaskServiceMock } from '../../services/mocks/parenttask-service-mock';
+
+
+import {ParentTaskServiceMock} from '../../services/mocks/parenttask-service-mock';
 import {TasksServiceMock} from '../../services/mocks/task-service-mock';
-import { ParentTaskService } from '../../services/parent-task.service';
-import { ProjectService } from '../../services/project-service.service';
-import { TasksService } from '../../services/task.service';
-import { UserService } from '../../services/user-service.service';
+import {ParentTaskService} from '../../services/parent-task.service';
+import {ProjectService} from '../../services/project-service.service';
+import {TasksService} from '../../services/task.service';
+import {UserService} from '../../services/user-service.service';
 import {ProjectServiceMock} from '../../services/mocks/project-service-mock';
 import {UserServiceMock} from '../../services/mocks/user-service-mock';
 
 
 import {CustomSortingPipe} from '../../common/CustomSortingPipe';
 import {UserFilterPipe} from '../../common/filterpipe';
-import { ParentTaskModalSerachFilterPipe } from '../../common/ParentTaskModalSerachFilterPipe';
-import { PrjoectModalSearchFilterPipe } from '../../common/ProjectModelSerachFilterPipe';
+import {ParentTaskModalSerachFilterPipe} from '../../common/ParentTaskModalSerachFilterPipe';
+import {PrjoectModalSearchFilterPipe} from '../../common/ProjectModelSerachFilterPipe';
 
 describe('ViewComponent', () => {
   let component: ViewComponent;
@@ -47,16 +54,19 @@ describe('ViewComponent', () => {
   let taskToEdit: Task;
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ParentTaskModalSerachFilterPipe, UserFilterPipe, CustomSortingPipe, PrjoectModalSearchFilterPipe,  ViewComponent, EditComponent ],
-            imports: [
+      declarations: [ParentTaskModalSerachFilterPipe, UserFilterPipe, CustomSortingPipe, PrjoectModalSearchFilterPipe, ViewComponent, EditComponent],
+      imports: [
         BrowserModule,
         FormsModule,
-        ReactiveFormsModule
-      ],
-      providers: [DataHolder, ErrorMessage, {provide: ParentTaskService, useClass:ParentTaskServiceMock}, {provide: TasksService, useClass: TasksServiceMock}, {provide: UserService, useClass: UserServiceMock}, {provide: ProjectService, useClass: ProjectServiceMock}
+        ReactiveFormsModule, AngularFontAwesomeModule,
+        NgbModule,
+        NouisliderModule,
+        DpDatePickerModule,
+        NgDatepickerModule],
+      providers: [DataHolder, ErrorMessage, {provide: ParentTaskService, useClass: ParentTaskServiceMock}, {provide: TasksService, useClass: TasksServiceMock}, {provide: UserService, useClass: UserServiceMock}, {provide: ProjectService, useClass: ProjectServiceMock}
       ]
     })
-    .compileComponents();
+      .compileComponents();
     this.task = new Task();
   }));
 

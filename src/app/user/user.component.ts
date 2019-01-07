@@ -12,9 +12,9 @@ import {FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
-  firstName: string;
-  lastName: string;
-  empId: number;
+//  firstName: string;
+//  lastName: string;
+//  empId: number;
   search: string;
   addOrUpdateButton = 'Add User';
   user = new UserVO();

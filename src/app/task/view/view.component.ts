@@ -45,18 +45,26 @@ export class ViewComponent implements OnInit {
       });
     }
   }
-  
-  
+
+
+  getViewClickStatus() {
+    //alert(value);
+    if (!this.showViewTask) {
+      this.showViewTask = !this.dataHolder.showEditTab();
+    }
+    return this.showViewTask;
+  }
+
   //Getting value from child
   childToParent(value) {
     this.taskToEdit = value.editedTask;
-    
+
     this.taskService.getTasksByProjectId(value.editedTask.project.projectId).subscribe(data => {
       this.tasks = cloneDeep(data);
       if (this.tasks.length > 0) {
         this.showData = true;
         this.dataHolder.addProjectTaskMap(value.editedTask.project.projectId, data);
-       }
+      }
     });
     this.showViewTask = true;//value.status;
   }
@@ -68,7 +76,7 @@ export class ViewComponent implements OnInit {
       if (this.tasks.length > 0) {
         this.showData = true;
         this.dataHolder.addProjectTaskMap(this.project.projectId, data);
-       }
+      }
     });
 
   }
@@ -87,10 +95,13 @@ export class ViewComponent implements OnInit {
       }
     });
   }
-  
+
   editTask(taskVal) {
     this.taskToEdit = taskVal;
     this.showViewTask = false;
+    this.dataHolder.addTabWithStyle('Edit Task', '/EditTask', 'nav-link active');
+    this.dataHolder.setShowEditTab(true);
+    this.dataHolder.updateTabStyle('View Task', 'nav-link');
   }
 
   getParentTask(parentId) {
